@@ -18,38 +18,46 @@
 
   <main class="container mt-5">
 
-    <section class="card shadow p-4">
-      <h2 class="mb-3">Descripción del proyecto</h2>
-
-      <p>
-        Este simulador representa un sistema básico de administración de socios de una institución.
-        Permite registrar nuevos socios, visualizar la lista de socios y gestionar el cobro de cuotas
-        mensuales.
-      </p>
-
-      <p>
-        La interacción del usuario se realiza mediante cuadros de diálogo de JavaScript
-        (Prompt, Alert y Confirm) y los resultados se visualizan en la consola del navegador.
-        El objetivo del proyecto es aplicar variables, arrays, funciones, ciclos y condicionales
-        para simular la lógica de un sistema administrativo.
-      </p>
-
-      <hr>
-
-      <p class="text-muted">
-        Abra la consola del navegador (F12) para interactuar con el simulador.
-      </p>
-    </section>
+ 
 
   </main>
-
-  <footer class="text-center mt-5 p-3 text-muted">
+<section class="container p-2">
+  <form action="" class="container-sm p-2 m-4 bg-light-subtle ">
+    <h3>Igrese un socio</h3>
+    <div class="mb-3">
+      <label for="socioNombre" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="socioNombre" placeholder="Ingrese el nombre aquí">
+      <label for="socioDni" class="form-label">DNI</label>
+      <input type="number" class="form-control" id="socioDni" placeholder="00.000.000">
+      <button type="submit" onclick="agregarSocio(event)" class="btn btn-info">
+        Guardar
+      </button><button  type="button" class="btn btn-dark" onclick="verSocios(event)">Ver Socios</button>
+    </div>
+  </form>
+</section>
+<table class="table container-sm">
+  <thead>
+    <tr>
+      <th>Nombre</th> 
+      <th> Dni</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="lista">
+   
+  </tbody> 
+  
+  
+  
+</table>
+<footer class="text-center mt-5 p-3 text-muted">
     <p>Proyecto JavaScript - Simulador de Gestión de Socios</p>
   </footer>
 
 
 
   <script src="js/logica.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
 </body>
 </html>
