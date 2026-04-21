@@ -1,0 +1,23 @@
+[
+  {
+    "nombre": "Juan",
+    "dni": "123",
+    "id": 1,
+    "activo": true,
+    "pagos": {
+      "enero": false,
+      "febrero": false,
+      "marzo": false,
+      "abril": false,
+      "mayo": false,
+      "junio": false,
+      "julio": false,
+      "agosto": false,
+      "septiembre": false,
+      "octubre": false,
+      "noviembre": false,
+      "diciembre": false
+    },
+    "celular":"1168863090"
+  }
+]
