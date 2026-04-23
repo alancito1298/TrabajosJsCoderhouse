@@ -103,25 +103,76 @@ function verSocios() {
 function agregarSocio(event) {
   event.preventDefault();
 
-  const socioNombre = document.getElementById("socioNombre").value;
-  const socioDni = document.getElementById("socioDni").value;
-  const socioNumero = document.getElementById("socioNumero").value;
-  const celular = document.getElementById("celular").value;
+  const nombreInput = document.getElementById("socioNombre");
+  const dniInput = document.getElementById("socioDni");
+  const numeroInput = document.getElementById("socioNumero");
+  const celularInput = document.getElementById("celular");
+
+  const socioNombre = nombreInput.value.trim();
+  const socioDni = dniInput.value.trim();
+  const socioNumero = numeroInput.value.trim();
+  const celular = celularInput.value.trim();
+
+  let errores = [];
+
+
+  [nombreInput, dniInput, numeroInput, celularInput]
+    .forEach(i => i.classList.remove("is-invalid"));
+
+ 
+  // VALIDACIONES
+
+
+  if (socioNombre.length < 3) {
+    errores.push("El nombre debe tener al menos 3 caracteres");
+    nombreInput.classList.add("is-invalid");
+  }
+
+  if (!/^\d+$/.test(socioDni)) {
+    errores.push("El DNI debe contener solo números");
+    dniInput.classList.add("is-invalid");
+  }
+
+  if (!socioNumero) {
+    errores.push("El número de socio es obligatorio");
+    numeroInput.classList.add("is-invalid");
+  }
+
+  if (celular && celular.length < 9) {
+    errores.push("El celular es demasiado corto");
+    celularInput.classList.add("is-invalid");
+  }
 
   let socios = JSON.parse(localStorage.getItem("socios")) || [];
 
   if (socios.some(s => s.dni === socioDni)) {
-    Swal.fire("Error", "El DNI ya existe", "error");
+    errores.push("El DNI ya está registrado");
+    dniInput.classList.add("is-invalid");
+  }
+
+  if (socios.some(s => s.id === socioNumero)) {
+    errores.push("El número de socio ya existe");
+    numeroInput.classList.add("is-invalid");
+  }
+
+
+  if (errores.length > 0) {
+    Swal.fire({
+      title: "Error en el formulario",
+      html: errores.join("<br>"),
+      icon: "error"
+    });
     return;
   }
 
+ 
   let nuevoSocio = {
     nombre: socioNombre,
     dni: socioDni,
     id: socioNumero,
     activo: true,
     pagos: crearPagosDesde(2026, 5),
-    celular: celular
+    celular: celular || "-"
   };
 
   socios.push(nuevoSocio);
@@ -131,6 +182,11 @@ function agregarSocio(event) {
   Swal.fire("Listo", "Socio agregado", "success");
 
   event.target.reset();
+
+
+  if (document.getElementById("tablaSocios")) {
+    verSocios();
+  }
 }
 
 
